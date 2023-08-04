@@ -1,0 +1,56 @@
+// build.gradle for android libraries that contain UI
+
+apply plugin: 'com.android.library'
+apply plugin: 'org.jetbrains.kotlin.android'
+apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdkVersion Android.compileSdk
+
+    defaultConfig {
+        minSdkVersion Android.minSdk
+        targetSdkVersion Android.targetSdk
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+    kotlinOptions {
+        jvmTarget = '17'
+    }
+    buildFeatures {
+        compose true
+        viewBinding true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion Compose.composeCompilerVersion
+        kotlinCompilerVersion Kotlin.version
+    }
+}
+
+dependencies{
+
+    implementation AndroidX.coreKtx
+    implementation AndroidX.appCompat
+
+    implementation Compose.activity
+    implementation Compose.ui
+    implementation Compose.lifecycle
+    implementation Compose.lifecycleViewModel
+    implementation Compose.material3
+    implementation Compose.iconsExtended
+    implementation Compose.tooling
+    implementation Compose.toolingPreview
+    implementation Compose.navigation
+
+    implementation Hilt.android
+    kapt Hilt.compiler
+}
