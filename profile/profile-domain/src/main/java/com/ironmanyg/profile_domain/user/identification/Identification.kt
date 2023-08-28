@@ -1,4 +1,4 @@
-package com.ironmanyg.profile_domain.user
+package com.ironmanyg.profile_domain.user.identification
 
 /**
  * Represents a user's identification details.

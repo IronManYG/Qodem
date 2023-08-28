@@ -1,4 +1,4 @@
-package com.ironmanyg.profile_domain.user
+package com.ironmanyg.profile_domain.user.contactInfo
 
 /** Represents a user's contact information.
  *

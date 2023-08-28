@@ -1,5 +1,10 @@
 package com.ironmanyg.profile_domain.user
 
+import com.ironmanyg.profile_domain.user.contactInfo.ContactInfo
+import com.ironmanyg.profile_domain.user.donationDetails.DonationDetails
+import com.ironmanyg.profile_domain.user.identification.Identification
+import com.ironmanyg.profile_domain.user.medicalDetails.MedicalDetails
+
 /**
  * Represents a user in the blood donation system.
  *

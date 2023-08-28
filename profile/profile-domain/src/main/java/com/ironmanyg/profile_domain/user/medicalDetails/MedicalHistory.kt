@@ -1,4 +1,4 @@
-package com.ironmanyg.profile_domain.user
+package com.ironmanyg.profile_domain.user.medicalDetails
 
 /**
  * Represents a user's medical history.

@@ -1,4 +1,4 @@
-package com.ironmanyg.profile_domain.user
+package com.ironmanyg.profile_domain.user.donationDetails
 
 /**
  * Enum class representing different badges that can be awarded to blood donors based on their contributions.

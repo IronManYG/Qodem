@@ -1,4 +1,4 @@
-package com.ironmanyg.profile_domain.user
+package com.ironmanyg.profile_domain.user.identification
 
 /**
  * Represents the types of identification documents that a user can provide.
