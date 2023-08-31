@@ -35,7 +35,7 @@ data class DonationCenter(
     val operationInfo: OperationInfo,
     val category: DonationCenterCategory,
     val availableDonationTypes: List<DonationType>,
-    val campaignInfo: CampaignInfo?,
+    val campaignInfo: CampaignInfo,
     val bloodInventories: List<BloodInventory>,
     val donationRecords: List<DonationRecord>,
 )
