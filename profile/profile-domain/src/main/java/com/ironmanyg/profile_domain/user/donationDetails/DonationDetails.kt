@@ -1,6 +1,6 @@
 package com.ironmanyg.profile_domain.user.donationDetails
 
-import com.ironmanyg.blood_donation_domain.DonationRecord
+import com.ironmanyg.blood_donation_domain.donationCenter.donationRecord.DonationRecord
 
 /**
  * Represents a user's donation details.

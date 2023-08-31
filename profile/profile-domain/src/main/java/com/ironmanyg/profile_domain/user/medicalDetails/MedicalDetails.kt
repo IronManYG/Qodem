@@ -1,6 +1,6 @@
 package com.ironmanyg.profile_domain.user.medicalDetails
 
-import com.ironmanyg.blood_donation_domain.BloodType
+import com.ironmanyg.blood_donation_domain.donationCenter.bloodInventory.bloodType.BloodType
 
 /**
  * Represents a user's medical details.
