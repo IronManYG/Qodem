@@ -32,6 +32,13 @@ object Modules {
     const val constants = ":constants"
     const val components = ":components"
 
+    const val community = ":community"
+    const val community_datasource = ":community:community-datasource"
+    const val community_datasource_test = ":community:community-datasource-test"
+    const val community_domain = ":community:community-domain"
+    const val community_interactors = ":community:community-interactors"
+    const val ui_community = ":community:ui-community"
+
     const val onboarding = ":onboarding"
     const val ui_onboarding = ":onboarding:ui-onboarding"
 
