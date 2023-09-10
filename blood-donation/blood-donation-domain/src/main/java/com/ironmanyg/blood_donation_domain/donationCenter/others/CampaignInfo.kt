@@ -4,7 +4,7 @@ package com.ironmanyg.blood_donation_domain.donationCenter.others
  * Represents the status and details of any ongoing blood donation campaigns.
  */
 data class CampaignInfo(
-    val campaign: CampaignDetails?  // Contains campaign details if there's an active campaign, null otherwise.
+    val campaignDetails: CampaignDetails?  // Contains campaign details if there's an active campaign, null otherwise.
 )
 
 /**
