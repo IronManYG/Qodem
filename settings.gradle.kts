@@ -46,6 +46,13 @@ include(":core-ui")
 include(":constants")
 include(":components")
 
+include(":community")
+include(":community:community-datasource")
+include(":community:community-datasource-test")
+include(":community:community-domain")
+include(":community:community-interactors")
+include(":community:ui-community")
+
 include(":onboarding")
 include(":onboarding:ui-onboarding")
 

@@ -3,5 +3,4 @@ apply(
 )
 
 dependencies {
-    "implementation"(Kotlinx.datetime)
 }
