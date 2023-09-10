@@ -3,9 +3,9 @@ package com.ironmanyg.blood_donation_datasource.network
 import com.ironmanyg.blood_donation_datasource.network.model.donationCenter.DonationCenterDto
 import com.ironmanyg.blood_donation_datasource.network.model.donationCenter.toDonationCenter
 import com.ironmanyg.blood_donation_domain.donationCenter.DonationCenter
-import io.ktor.client.*
-import io.ktor.client.call.*
-import io.ktor.client.request.*
+import io.ktor.client.HttpClient
+import io.ktor.client.call.body
+import io.ktor.client.request.get
 
 /**
  * The implementation of the [BloodDonationService] interface.
@@ -26,7 +26,8 @@ class BloodDonationServiceImpl(
      * @return A list of [DonationCenter].
      */
     override suspend fun getDonationCenters(): List<DonationCenter> {
-        return httpClient.get(EndPoints.getFullUrl(EndPoints.Endpoint.DONATION_CENTERS)).body<List<DonationCenterDto>>().map {
+        return httpClient.get(EndPoints.getFullUrl(EndPoints.Endpoint.DONATION_CENTERS))
+            .body<List<DonationCenterDto>>().map {
             it.toDonationCenter()
         }
     }
