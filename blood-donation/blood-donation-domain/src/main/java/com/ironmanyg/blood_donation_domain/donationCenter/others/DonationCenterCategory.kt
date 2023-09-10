@@ -36,3 +36,20 @@ sealed class DonationCenterCategory(val name: String) {
      */
     data object MilitaryBloodBank : DonationCenterCategory("Military Blood Bank")
 }
+
+/**
+ * Converts the name of a donation center category to its corresponding [DonationCenterCategory] object.
+ *
+ * @param name The name of the donation center category.
+ * @return The corresponding [DonationCenterCategory] object.
+ */
+fun fromNameToDonationCenterCategory(name: String): DonationCenterCategory {
+    return when (name) {
+        "Blood Bank" -> DonationCenterCategory.BloodBank
+        "Blood Collection Center" -> DonationCenterCategory.BloodCollectionCenter
+        "Mobile Blood Drive" -> DonationCenterCategory.MobileBloodDrive(0, 0)
+        "Hospital Blood Bank" -> DonationCenterCategory.HospitalBloodBank
+        "Military Blood Bank" -> DonationCenterCategory.MilitaryBloodBank
+        else -> DonationCenterCategory.BloodBank
+    }
+}
