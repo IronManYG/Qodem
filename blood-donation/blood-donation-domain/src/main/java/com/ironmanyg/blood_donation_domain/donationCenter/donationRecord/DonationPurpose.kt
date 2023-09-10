@@ -45,3 +45,19 @@ sealed class DonationPurpose(val description: String) {
         )
     }
 }
+
+/**
+ * Converts a donation purpose name to its respective [DonationPurpose] object.
+ *
+ * @param name The name of the donation purpose.
+ * @return The [DonationPurpose] object associated with the given name.
+ */
+fun fromNameToDonationPurpose(name: String): DonationPurpose {
+    return when (name) {
+        "Directed donation" -> DonationPurpose.DirectedDonation
+        "Voluntary donation" -> DonationPurpose.VoluntaryDonation
+        "Replacement donation" -> DonationPurpose.ReplacementDonation
+        "Autologous donation" -> DonationPurpose.AutologousDonation
+        else -> DonationPurpose.VoluntaryDonation
+    }
+}
