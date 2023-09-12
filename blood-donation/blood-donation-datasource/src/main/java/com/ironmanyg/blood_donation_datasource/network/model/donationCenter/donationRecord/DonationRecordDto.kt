@@ -66,7 +66,7 @@ fun DonationRecordDto.toDonationRecord() = DonationRecord(
     donationCenterId = donationCenterId,
     bloodType = BloodType.fromComponents(
         BloodGroup.valueOf(bloodType.first().toString()),
-        RhFactor.valueOf(bloodType.last().toString())
+        RhFactor.fromSymbol(bloodType.last().toString()),
     ),
     donationType = fromNameToDonationType(donationType),
     donationPurpose = fromNameToDonationPurpose(donationPurpose),

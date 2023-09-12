@@ -42,7 +42,10 @@ data class BloodInventoryDto(
 fun BloodInventoryDto.toBloodInventory() = BloodInventory(
     id = id,
     donationCenterId = donationCenterId,
-    bloodType = BloodType.fromComponents(BloodGroup.valueOf(bloodType.first().toString()),RhFactor.valueOf(bloodType.last().toString())),
+    bloodType = BloodType.fromComponents(
+        BloodGroup.valueOf(bloodType.first().toString()),
+        RhFactor.fromSymbol(bloodType.last().toString()),
+    ),
     amount = amount,
     volume = volume,
 )
