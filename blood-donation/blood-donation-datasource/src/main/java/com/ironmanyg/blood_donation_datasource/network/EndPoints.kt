@@ -9,7 +9,7 @@ object EndPoints {
     /**
      * The base URL for the API. All other endpoints will be relative to this URL.
      */
-    private const val BASE_URL = "https://ironmanyg.com/api/"
+    private const val BASE_URL = "https://api.jsonbin.io/v3/b/"
 
     /**
      * Enumeration grouping all available API endpoints, providing better type safety and logical grouping.
@@ -18,7 +18,7 @@ object EndPoints {
         /**
          * Endpoint to fetch the donation centers information from the API.
          */
-        DONATION_CENTERS("donation-centers")
+        DONATION_CENTERS("64ff620ad972192679c1e572?meta=false")
     }
 
     /**
