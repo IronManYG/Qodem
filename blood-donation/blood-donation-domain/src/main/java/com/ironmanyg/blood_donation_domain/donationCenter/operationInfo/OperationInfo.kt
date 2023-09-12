@@ -20,7 +20,7 @@ package com.ironmanyg.blood_donation_domain.donationCenter.operationInfo
  *                     can book appointments, aiding in efficient scheduling.
  */
 data class OperationInfo(
-    val workingHours: Pair<SimpleTime, SimpleTime>,
+    val workingHours: WorkingHours,
     val workingDays: List<Day>,
     val gapBetweenAppointment: Int,
     val donorLimit: Int,
