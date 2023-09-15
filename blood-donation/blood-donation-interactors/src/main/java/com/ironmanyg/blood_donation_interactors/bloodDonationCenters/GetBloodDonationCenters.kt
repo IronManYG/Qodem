@@ -47,7 +47,7 @@ class GetBloodDonationCenters(
         try {
             emit(DataState.Loading(progressBarState = ProgressBarState.Loading))
 
-            delay(1000)
+            delay(1000) // only for testing purpose
 
             // the reason of add this second try catch within over all try catch is to catch the network exception.
             // and there is a network exception, it will not filed completely we can return the cached data
