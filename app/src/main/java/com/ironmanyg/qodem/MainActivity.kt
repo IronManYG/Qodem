@@ -4,9 +4,11 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -17,6 +19,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import com.ironmanyg.blood_donation_domain.donationCenter.DonationCenter
 import com.ironmanyg.blood_donation_interactors.BloodDonationInteractors
 import com.ironmanyg.core.domain.DataState
@@ -75,11 +78,38 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.background
                 ) {
                     Box(modifier = Modifier.fillMaxSize()) {
-//                    Greeting("Qodem")
                         LazyColumn {
-                            items(donationCenter.value) { donationCenter ->
-                                Text(text = donationCenter.nameInfo.arabic)
-                                Text(text = donationCenter.nameInfo.english)
+                            item {
+                                Greeting("Qodem")
+                            }
+                            item {
+                                if (donationCenter.value.isNotEmpty()) {
+                                    Text(
+                                        text = "Arabic Names",
+                                        style = MaterialTheme.typography.headlineLarge
+                                    )
+                                    Spacer(modifier = Modifier.height(8.dp))
+                                }
+                            }
+                            itemsIndexed(donationCenter.value) { index, donationCenter ->
+                                Text(text = "${index + 1} - ${donationCenter.nameInfo.arabic}")
+                                Spacer(modifier = Modifier.height(8.dp))
+                            }
+                            item {
+                                if (donationCenter.value.isNotEmpty()) {
+                                    Text(
+                                        text = "English Names",
+                                        style = MaterialTheme.typography.headlineLarge
+                                    )
+                                    Spacer(modifier = Modifier.height(8.dp))
+                                }
+                            }
+                            itemsIndexed(
+                                items = donationCenter.value,
+                                key = { _, donationCenter -> donationCenter.nameInfo.arabic }
+                            ) { index, donationCenter ->
+                                Text(text = "${index + 1} - ${donationCenter.nameInfo.english}")
+                                Spacer(modifier = Modifier.height(8.dp))
                             }
                         }
                         if (progressBarState.value == ProgressBarState.Loading) {
