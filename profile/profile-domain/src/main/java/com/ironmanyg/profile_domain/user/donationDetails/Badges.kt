@@ -1,7 +1,9 @@
 package com.ironmanyg.profile_domain.user.donationDetails
 
 /**
- * Enum class representing different badges that can be awarded to blood donors based on their contributions.
+ * The `Badge` enum class is utilized to categorize and award badges to blood donors based on their
+ * specific contributions and achievements in the blood donation community. Each enum constant represents
+ * a specific badge that a donor can receive.
  */
 enum class Badge {
     /** Awarded to users who donate blood for the first time. */
@@ -62,7 +64,48 @@ enum class Badge {
     DonationAmbassador,
 
     /** Awarded to users who donate blood internationally or participate in cross-border blood donation efforts. */
-    GlobalGiver
+    GlobalGiver,
+
+    /**
+     * Unknown badge. This is the default value for the enum constant and should not be used.
+     */
+    UNKNOWN;
+
+    companion object {
+
+        /**
+         * A utility function to get a Badge enum entry from its name.
+         * The name parameter is the String representation of the badge which is to be converted to a Badge enum type.
+         *
+         * @param name the name of the badge in a human-readable format.
+         * @return the corresponding Badge enum entry, or UNKNOWN if the name does not match any known badges.
+         */
+        fun fromName(name: String) :Badge {
+            return when(name) {
+                "First time donor" -> FirstTimeDonor
+                "Frequent donor" -> FrequentDonor
+                "Life saver" -> LifeSaver
+                "Community hero" -> CommunityHero
+                "Blood group champion" -> BloodGroupChampion
+                "Double redDonor" -> DoubleRedDonor
+                "Platelet donor" -> PlateletDonor
+                "Hematologist" -> Hematologist
+                "Emergency responder" -> EmergencyResponder
+                "Donation streak" -> DonationStreak
+                "Golden gallon" -> GoldenGallon
+                "Bleed for good" -> BleedForGood
+                "Donor advocate" -> DonorAdvocate
+                "Blood drive host" -> BloodDriveHost
+                "Team player" -> TeamPlayer
+                "Lifetime donor achievement" -> LifetimeDonorAchievement
+                "Donation educator" -> DonationEducator
+                "Virtual donor" -> VirtualDonor
+                "Donation ambassador" -> DonationAmbassador
+                "Global giver" -> GlobalGiver
+                else -> UNKNOWN
+            }
+        }
+    }
 }
 
 
