@@ -34,7 +34,8 @@ class ProfileServiceImpl(
      */
     override suspend fun getProfile(userID: String): User {
         val url = EndPoints.getFullUrl(EndPoints.Endpoint.PROFILES) + userID
-        val response: HttpResponse = httpClient.get(url)
+        val testUrl = EndPoints.getFullUrl(EndPoints.Endpoint.PROFILE)
+        val response: HttpResponse = httpClient.get(testUrl)
 
         return response.body<UserDto>().toUser()
     }

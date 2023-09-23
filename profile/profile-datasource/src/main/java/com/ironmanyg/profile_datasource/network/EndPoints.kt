@@ -16,9 +16,13 @@ object EndPoints {
      */
     enum class Endpoint(val path: String) {
         /**
-         * Endpoint to fetch the profile information from the API.
+         * Endpoint to fetch the profiles information from the API.
          */
-        PROFILE("profile"),
+        PROFILES("profiles/"),
+        /**
+         * Endpoint to fetch test profile info from API.
+         */
+        PROFILE("650ef93012a5d376598219a2"),
     }
 
     /**
