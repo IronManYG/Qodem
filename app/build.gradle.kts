@@ -53,6 +53,8 @@ dependencies {
     implementation(project(Modules.core))
     implementation(project(Modules.blood_donation_domain))
     implementation(project(Modules.blood_donation_interactors))
+    implementation(project(Modules.profile_domain))
+    implementation(project(Modules.profile_interactors))
 
     implementation(AndroidX.coreKtx)
     implementation(AndroidX.appCompat)

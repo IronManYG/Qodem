@@ -26,6 +26,8 @@ import com.ironmanyg.core.domain.DataState
 import com.ironmanyg.core.domain.ProgressBarState
 import com.ironmanyg.core.domain.UIComponent
 import com.ironmanyg.core.util.Logger
+import com.ironmanyg.profile_domain.user.User
+import com.ironmanyg.profile_interactors.ProfileInteractors
 import com.ironmanyg.qodem.ui.theme.QodemTheme
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
@@ -34,6 +36,7 @@ import kotlinx.coroutines.flow.onEach
 
 class MainActivity : ComponentActivity() {
 
+    private val user: MutableState<User?> = mutableStateOf(null)
     private val donationCenter: MutableState<List<DonationCenter>> = mutableStateOf(listOf())
     private val progressBarState: MutableState<ProgressBarState> =
         mutableStateOf(ProgressBarState.Idle)
@@ -43,6 +46,33 @@ class MainActivity : ComponentActivity() {
 
         val logger =
             Logger(tag = "getBloodDonationCentersTest", isDebug = true) // create a logger instance
+        val getUser = ProfileInteractors.build(logger).getUserProfile
+        getUser.execute("1").onEach { dataState ->
+            when (dataState) {
+                is DataState.Response -> {
+                    when (dataState.uiComponent) {
+                        is UIComponent.Dialog -> {
+                            logger.log((dataState.uiComponent as UIComponent.Dialog).description)
+                        }
+
+                        is UIComponent.None -> {
+                            (dataState.uiComponent as UIComponent.None).message?.let { logger.log(it) }
+                        }
+
+                        else -> {}
+                    }
+                }
+
+                is DataState.Data -> {
+                    user.value = dataState.data
+                }
+
+                is DataState.Loading -> {
+                    progressBarState.value = dataState.progressBarState
+                }
+            }
+        }.launchIn(CoroutineScope(IO))
+
         val getBloodDonationCenters = BloodDonationInteractors.build(logger).getBloodDonationCenters
         getBloodDonationCenters.execute().onEach { dataState ->
             when (dataState) {
@@ -81,6 +111,28 @@ class MainActivity : ComponentActivity() {
                         LazyColumn {
                             item {
                                 Greeting("Qodem")
+                            }
+                            item {
+                                Spacer(modifier = Modifier.height(8.dp))
+                            }
+                            item {
+                                Text(
+                                    text = "User",
+                                    style = MaterialTheme.typography.headlineLarge
+                                )
+                                Spacer(modifier = Modifier.height(8.dp))
+                            }
+                            item {
+                                user.value?.let {
+                                    Text(text = "Name: ${it.name.firstName} ${it.name.lastName}")
+                                    Spacer(modifier = Modifier.height(8.dp))
+                                }
+                            }
+                            item {
+                                user.value?.let {
+                                    Text(text = "Email: ${it.contactInfo.email}")
+                                    Spacer(modifier = Modifier.height(8.dp))
+                                }
                             }
                             item {
                                 if (donationCenter.value.isNotEmpty()) {
