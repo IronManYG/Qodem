@@ -22,7 +22,7 @@ object EndPoints {
         /**
          * Endpoint to fetch test profile info from API.
          */
-        PROFILE("650ef93012a5d376598219a2"),
+        PROFILE("650ef93012a5d376598219a2?meta=false"),
     }
 
     /**
