@@ -1,6 +1,7 @@
 package com.ironmanyg.profile_interactors.util
 
 import com.ironmanyg.core.domain.DataState
+import com.ironmanyg.core.domain.UIComponent
 import com.ironmanyg.core.util.Logger
 import io.ktor.client.plugins.HttpRequestTimeoutException
 import io.ktor.client.plugins.ResponseException
@@ -59,33 +60,39 @@ suspend inline fun <reified T> FlowCollector<DataState<T>>.handleExceptions(
     // In production, consider logging to a file or external system for better tracking.
     exception.printStackTrace()
 
-    // Define a title based on the type of exception to give a clear context to the user.
-    val title = when (exception) {
-        is HttpRequestTimeoutException -> "Network Timeout Error"
-        is ResponseException -> "HTTP Error"
-        is SerializationException -> "Data Parsing Error"
-        else -> "Unknown Error"
-    }
+    // Define a title and choose the appropriate UIComponent based on the type of exception.
+    val (title, uiComponent) = when (exception) {
+        is HttpRequestTimeoutException -> "Network Timeout Error" to UIComponent.Dialog(
+            title = "Network Timeout",
+            description = customMessage
+                ?: "The request timed out. Please check your internet connection."
+        )
 
-    // Define a message based on the type of exception, providing detailed information about the error occurred.
-    // If a custom message is provided, it takes precedence over the default message.
-    val message = customMessage ?: when (exception) {
-        is HttpRequestTimeoutException -> "Network Timeout Error: ${exception.message ?: "The request timed out."}"
-        is ResponseException -> "HTTP Error: HTTP status ${exception.response.status.value}: ${exception.message}"
-        is SerializationException -> "Data Parsing Error: ${exception.message ?: "An error occurred while parsing the data."}"
-        else -> "Unknown Error: ${exception.message ?: "An unknown error occurred."}"
+        is ResponseException -> "HTTP Error" to UIComponent.Notification(
+            title = "Server Error",
+            description = customMessage ?: "A server error occurred. Please try again later."
+        )
+
+        is SerializationException -> "Data Parsing Error" to UIComponent.SnackBar(
+            message = customMessage ?: "An error occurred while parsing data."
+        )
+
+        else -> "Unknown Error" to UIComponent.Toast(
+            message = customMessage ?: "An unknown error occurred."
+        )
     }
 
     // Log the error message to the provided logger, if available.
-    logger?.log(message)
+    if (exception is ResponseException) {
+        logger?.log("$title: HTTP status ${exception.response.status.value}: ${exception.message}")
+    } else {
+        logger?.log("$title: ${exception.message ?: "An unknown error occurred."}")
+    }
 
-    // Emit a data state with a UI component to reflect the error state in the UI with a dialog box containing the error title and message.
+    // Emit a data state with the chosen UI component to reflect the error state in the UI.
     emit(
-       DataState.Response(
-            uiComponent = com.ironmanyg.core.domain.UIComponent.Dialog(
-                title = title,
-                description = message
-            )
+        DataState.Response(
+            uiComponent = uiComponent
         )
     )
 }
