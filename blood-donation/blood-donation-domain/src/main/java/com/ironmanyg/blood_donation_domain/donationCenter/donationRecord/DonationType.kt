@@ -38,3 +38,19 @@ sealed class DonationType(val description: String) {
      */
     data object DoubleRedCell : DonationType("Double red cell")
 }
+
+/**
+ * Converts a donation type name to its respective [DonationType] object.
+ *
+ * @param name The name of the donation type.
+ * @return The [DonationType] object associated with the given name.
+ */
+fun fromNameToDonationType(name: String): DonationType {
+    return when (name) {
+        "Whole blood" -> DonationType.WholeBlood
+        "Platelet" -> DonationType.Platelet
+        "Plasma" -> DonationType.Plasma
+        "Double red cell" -> DonationType.DoubleRedCell
+        else -> DonationType.WholeBlood
+    }
+}

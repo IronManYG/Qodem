@@ -8,6 +8,7 @@ package com.ironmanyg.profile_domain.user.identification
  *
  * @property Passport Represents a passport document.
  * @property NationalID Represents a national identification card.
+ * @property UNKNOWN Represents an unknown identification document.
  */
 enum class IDType {
     /**
@@ -24,5 +25,30 @@ enum class IDType {
      * A national identification card is an identity document issued by a government to its citizens
      * for the purpose of verifying the holder's identity within the country.
      */
-    NationalID
+    NationalID,
+
+    /**
+     * Represents an unknown identification document.
+     *
+     * This is used to prevent application crashes due to invalid data.
+     */
+    UNKNOWN;
+
+    companion object {
+        /**
+         * Function to map a string representation of IDType to its respective enum constant.
+         *
+         * This function facilitates the conversion of IDType received from the network layer as a string to its corresponding enum representation, helping in maintaining type safety.
+         *
+         * @param name The string representation of IDType.
+         * @return The corresponding [IDType] enum constant. Returns [IDType.UNKNOWN] for unmatched names to prevent application crashes due to invalid data.
+         */
+        fun fromName(name: String): IDType {
+            return when (name) {
+                "Passport" -> Passport
+                "NationalID" -> NationalID
+                else -> UNKNOWN
+            }
+        }
+    }
 }

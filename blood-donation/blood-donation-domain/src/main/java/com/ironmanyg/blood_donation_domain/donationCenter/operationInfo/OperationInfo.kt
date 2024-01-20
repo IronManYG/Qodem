@@ -20,38 +20,35 @@ package com.ironmanyg.blood_donation_domain.donationCenter.operationInfo
  *                     can book appointments, aiding in efficient scheduling.
  */
 data class OperationInfo(
-    val workingHours: Pair<SimpleTime, SimpleTime>,
+    val workingHours: WorkingHours,
     val workingDays: List<Day>,
     val gapBetweenAppointment: Int,
     val donorLimit: Int,
     val timeSlots: List<TimeSlot>
-) {
+)
 
-    /**
-     * Converts a list of strings representing days (either full names or abbreviations) to a `List<Day>`.
-     *
-     * This function is designed to be flexible in handling day representations. For instance, both "Monday"
-     * and "Mon" will be mapped to [Day.MONDAY]. If a provided string doesn't match any day, it's ignored.
-     *
-     * @param days A list of strings where each string is a day's full name (e.g., "Monday") or abbreviation (e.g., "Mon").
-     * @return A list of [Day] enums corresponding to the provided list of strings.
-     */
-    fun stringDaysToListOfDays(days: List<String>): List<Day> {
-        return days.mapNotNull { dayString ->
-            // Check against both full names and abbreviations for days
-            when (dayString.lowercase()) {
-                "monday", "mon" -> Day.MONDAY
-                "tuesday", "tue" -> Day.TUESDAY
-                "wednesday", "wed" -> Day.WEDNESDAY
-                "thursday", "thu" -> Day.THURSDAY
-                "friday", "fri" -> Day.FRIDAY
-                "saturday", "sat" -> Day.SATURDAY
-                "sunday", "sun" -> Day.SUNDAY
-                // If the string doesn't match any day, return null to be filtered out by mapNotNull
-                else -> null
-            }
+/**
+ * Converts a list of strings representing days (either full names or abbreviations) to a `List<Day>`.
+ *
+ * This function is designed to be flexible in handling day representations. For instance, both "Monday"
+ * and "Mon" will be mapped to [Day.MONDAY]. If a provided string doesn't match any day, it's ignored.
+ *
+ * @param days A list of strings where each string is a day's full name (e.g., "Monday") or abbreviation (e.g., "Mon").
+ * @return A list of [Day] enums corresponding to the provided list of strings.
+ */
+fun stringDaysToListOfDays(days: List<String>): List<Day> {
+    return days.mapNotNull { dayString ->
+        // Check against both full names and abbreviations for days
+        when (dayString.lowercase()) {
+            "monday", "mon" -> Day.MONDAY
+            "tuesday", "tue" -> Day.TUESDAY
+            "wednesday", "wed" -> Day.WEDNESDAY
+            "thursday", "thu" -> Day.THURSDAY
+            "friday", "fri" -> Day.FRIDAY
+            "saturday", "sat" -> Day.SATURDAY
+            "sunday", "sun" -> Day.SUNDAY
+            // If the string doesn't match any day, return null to be filtered out by mapNotNull
+            else -> null
         }
     }
-
-
 }
